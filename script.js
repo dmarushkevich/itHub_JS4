@@ -1,4 +1,4 @@
-const form = document.forms.namedItem("card-form")
+    const form = document.forms.namedItem("card-form")
 
 const div_card_bank = document.getElementById("card-result__card-bank")
 const div_card_type = document.getElementById("card-result__card-type")
@@ -12,7 +12,7 @@ const banks_imgs = {
     'Alfabank': 'alpha.png',
     'Tinkoff': 'tinkoff.png'
 }
-
+    
 const card_imgs = {
     'VISA': 'visa.png',
     'MasterCard': 'mastercard.png',
@@ -21,7 +21,7 @@ const card_imgs = {
 }
 
 
-function addInfoToTable(arr){
+function PushToTable(arr){
     let table = document.getElementById("table")
     let row = table.insertRow()
     for(let i = 0; i < arr.length; i++){
@@ -31,7 +31,7 @@ function addInfoToTable(arr){
 }
 const hasOnlyDigits = (v) => /^\d+$/.test(v)
 const hasOnlyLettersAndSpaces = (v) => {return /^[A-Za-z\s]*$/.test(v)}
-function checkSelect(selectedItem){
+function CheckList(selectedItem){
     if (selectedItem === ""){
         return false
     }
@@ -145,7 +145,7 @@ form.addEventListener("submit", function(e) {
     let month = form.elements.namedItem("month").value
     let year = form.elements.namedItem("year").value
 
-    if (!checkSelect(bank_name)) {
+    if (!CheckList(bank_name)) {
         alert("Не выбран Банк")
         completedFields["bank_name"] = false
         clearField("bank_name")
@@ -153,7 +153,7 @@ form.addEventListener("submit", function(e) {
         completedFields["bank_name"] = true
     }
 
-    if (!checkSelect(card_type)) {
+    if (!CheckList(card_type)) {
         alert("Не выбрана платежная система")
         completedFields["card_type"] = false
         clearField("card_type")
@@ -182,11 +182,10 @@ form.addEventListener("submit", function(e) {
         completedFields["year"] = true
     }
 
-    // Проверяем заполненность всех полей
     if (Object.keys(completedFields).every(elem => completedFields[elem] == true)) {
         let cardData = []
         cardData.push(bank_name, card_type, card_number, card_holder, month + '/' + year)
-        addInfoToTable(cardData)
+        PushToTable(cardData)
         clearAll()
     }
     else {
